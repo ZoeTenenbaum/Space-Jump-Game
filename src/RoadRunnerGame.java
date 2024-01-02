@@ -14,6 +14,8 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private BufferedImage flowerImage;
     private BufferedImage rockImage;
     private BufferedImage thornImage;
+    private BufferedImage plannetImage;
+
     private int characterY = 300;
     private int characterX = 100; // use for hitting obsacles
     private boolean isJumping = false;
@@ -25,6 +27,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(600, 600));
         try {
+            plannetImage = ImageIO.read(new File("/Users/zoetenenbaum/plannet.png"));
             characterImage = ImageIO.read(new File("/Users/zoetenenbaum/bee.png"));
             flowerImage = ImageIO.read(new File("/Users/zoetenenbaum/flower.png"));
             rockImage = ImageIO.read(new File("/Users/zoetenenbaum/rock.png"));
@@ -43,13 +46,21 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         setBackground(Color.BLACK);
+
         g.drawImage(characterImage, 100, characterY, 75, 75,null);
+
         for (Obstacle obstacle : background.getObstacles()) {
             g.drawImage(rockImage, obstacle.x1, obstacle.y1, obstacle.width/2, obstacle.height1/2,null);
             g.drawImage(thornImage, obstacle.x1, obstacle.y2, obstacle.width/2, obstacle.height2/2,null);
         }
+
+        for (Obstacle obstacle : background.getMoreObstacles()) {
+            g.drawImage(plannetImage, obstacle.x1, obstacle.y2, obstacle.width, obstacle.height2,null);
+        }
+
         shifter -= 1.5;
         g.drawImage(flowerImage, shifter, 150, 300, 300, null);
+
         background.update();
 
         if (isJumping) {
