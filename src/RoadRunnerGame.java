@@ -45,8 +45,8 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.BLACK);
         g.drawImage(characterImage, 100, characterY, 75, 75,null);
         for (Obstacle obstacle : background.getObstacles()) {
-            g.drawImage(rockImage, obstacle.x1, obstacle.y1, obstacle.width, obstacle.height1,null);
-            g.drawImage(thornImage, obstacle.x1, obstacle.y2, obstacle.width, obstacle.height2,null);
+            g.drawImage(rockImage, obstacle.x1, obstacle.y1, obstacle.width/2, obstacle.height1/2,null);
+            g.drawImage(thornImage, obstacle.x1, obstacle.y2, obstacle.width/2, obstacle.height2/2,null);
         }
         shifter -= 1.5;
         g.drawImage(flowerImage, shifter, 150, 300, 300, null);
